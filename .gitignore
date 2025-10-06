@@ -1,0 +1,34 @@
+.venv
+pyrightconfig.json
+.env
+# --- Python general ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+*.so
+*.egg
+*.egg-info/
+*.manifest
+*.spec
+*.log
+# --- Virtual environments ---
+venv/
+.env/
+.venv/
+env/
+ENV/
+
+# --- Environment & Secrets ---
+# Never commit your .env file or other secret configs
+*.env
+.env.*
+config.json
+secrets.json
+
+# --- IDE / Editor files ---
+.vscode/
+.idea/
+*.swp
+*.swo

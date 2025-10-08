@@ -1,7 +1,5 @@
 # lazyT API
 
----
-
 ## overview
 
 This is a task manager API, written using python framework Django and DjangoRESTFRAMEWORK. This is mainly an api so no frontend.

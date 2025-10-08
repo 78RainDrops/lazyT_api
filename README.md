@@ -1,25 +1,14 @@
-# lazyT API
-
----
-
-## overview
+📌 lazyT API
+overview
 
 This is a task manager API, written using python framework Django and DjangoRESTFRAMEWORK. This is mainly an api so no frontend.
 
----
-
-## Features
-
-- Add Task
-- View all and specific task
-- Edit task, mark the task done
-- Delete Task
-
----
-
-## Project Structure
-
-```
+🚀 Features
+Add Task
+View all and specific task
+Edit task, mark the task done
+Delete Task
+📁 Project Structure
 
     lazyT_api/
     │
@@ -51,53 +40,40 @@ This is a task manager API, written using python framework Django and DjangoREST
     ├── README.md
     └── .gitignore
 
+🛠 Installation And Setup
 
-```
+(just look or use the requirements.txt)
 
----
-
-## Installation And Setup
-
-- Python 3.12.3
-- Django (just look or use the requirements.txt)
-
-### Installation
-
-```
-
+Installation
 
 # Clone the repository
+
 git clone https://github.com/78RainDrops/lazyT_api.git
 cd lazyT_api
 
 # Install dependencies
+
 # Create a venv or virtual environment
+
 python -m venv .venv
+
 # or
+
 python3 -m venv .venv
+
 # Enable the venv
+
 source .venv/bin/activate
+
 # install pip packages using requirements.txt
-pip install -r requirements.txt   # Python
 
+pip install -r requirements.txt # Python
 
-```
-
----
-
-## Usage
+▶ Usage
 
 Run the django server:
 
-```
-
 python manage.py runserver
 
-
-```
-
----
-
-# Author
-
-- 78RainDrops - https://github.com/78RainDrops
+👨‍💻 Author
+78RainDrops - https://github.com/78RainDrops

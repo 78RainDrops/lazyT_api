@@ -1,9 +1,11 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
+from rest_framework.pagination import PageNumberPagination
 from rest_framework import status
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.models import User
+from django.db.models import Q
 from .serializers import TaskSerializer, UserSerializer
 from .models import Task
 from .utils import generate_token
@@ -14,8 +16,33 @@ from .utils import generate_token
 class TaskList(APIView):
     def get(self, request):
         task = Task.objects.filter(user=request.user).order_by("-created_at")
-        serializer = TaskSerializer(task, many=True)
-        return Response(serializer.data)
+
+        # Filter
+        completed = request.query_params.get("completed")
+        priority = request.query_params.get("priority")
+
+        if completed is not None:
+            completed = completed.lower()
+            if completed in ["true", "1", "yes"]:
+                task = task.filter(is_completed=True)
+            elif completed in ["false", "0", "no"]:
+                task = task.filter(is_completed=False)
+
+        if priority:
+            task = task.filter(priority__iexact=priority)
+
+        # search
+        search = request.query_params.get("search")
+        if search:
+            task = task.filter(
+                Q(title__icontains=search) | Q(description__icontains=search)
+            )
+
+        paginator = PageNumberPagination()
+        paginator_task = paginator.paginate_queryset(task, request)
+        serializer = TaskSerializer(paginator_task, many=True)
+        # return Response(serializer.data)
+        return paginator.get_paginated_response(serializer.data)
 
     def post(self, request):
         serializer = TaskSerializer(data=request.data)

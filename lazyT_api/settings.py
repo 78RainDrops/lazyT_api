@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 from decouple import config
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -137,6 +138,7 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 1,
+    "EXCEPTION_HANDLER": "tasks.handlers.custom_exception_handler",
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
@@ -145,4 +147,34 @@ SPECTACULAR_SETTINGS = {
     "DESCRIPTION": "API documentation for the LazyT Task Manager built with Django REST Framework",
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
+}
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "[{asctime}] {levelname} {name}: {message}",
+            "style": "{",
+        },
+        "simple": {
+            "format": "{levelname}: {message}",
+            "style": "{",
+        },
+    },
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": "simple",
+        },
+        "file": {
+            "class": "logging.FileHandler",
+            "filename": os.path.join(BASE_DIR, "lazyT_api.log"),
+            "formatter": "verbose",
+        },
+    },
+    "root": {
+        "handlers": ["console", "file"],
+        "level": "INFO",
+    },
 }

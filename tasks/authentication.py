@@ -1,7 +1,5 @@
 from rest_framework.authentication import BaseAuthentication
-from rest_framework.response import Response
-from rest_framework import exceptions, status
-from django.contrib.auth.models import User
+from rest_framework import exceptions
 from .utils import verify_user
 
 

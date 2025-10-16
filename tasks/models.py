@@ -16,10 +16,17 @@ class Task(models.Model):
         max_length=255,
         choices=[("low", "Low"), ("medium", "Medium"), ("high", "High")],
         default="medium",
+        db_index=True,
     )
     due_date = models.DateField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        indexes = [
+            models.Index(fields=["priority"]),
+            models.Index(fields=["is_completed"]),
+        ]
 
     def __str__(self):
         return f"{self.title} - {self.user.username}"

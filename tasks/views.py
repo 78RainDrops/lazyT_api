@@ -16,7 +16,11 @@ from .utils import generate_token
 
 class TaskList(APIView):
     def get(self, request):
-        task = Task.objects.filter(user=request.user).order_by("-created_at")
+        task = (
+            Task.objects.filter(user=request.user)
+            .select_related("user")
+            .order_by("-created_at")
+        )
 
         # Filter
         completed = request.query_params.get("completed")

@@ -24,7 +24,11 @@ def custom_exception_handler(exc, context):
         custom_response = {
             "status": "error",
             "message": message,
-            "details": data,
+            "error": {
+                "type": exc.__class__.__name__,
+                "details": data,
+                "status_code": response.status_code,
+            },
         }
         response.data = custom_response
     else:
@@ -34,7 +38,11 @@ def custom_exception_handler(exc, context):
         custom_response = {
             "status": "error",
             "message": "Internal server error.",
-            "details": None,
+            "error": {
+                "type": "ServerError",
+                "details": None,
+                "status_code": status.HTTP_500_INTERNAL_SERVER_ERROR,
+            },
         }
         response = Response(
             custom_response, status=status.HTTP_500_INTERNAL_SERVER_ERROR

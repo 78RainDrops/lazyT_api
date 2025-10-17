@@ -15,7 +15,18 @@ from .utils import generate_token
 
 
 class TaskList(APIView):
+    """
+    Handles the fetching of all task of the user,
+    and create a new task.
+    """
+
     def get(self, request):
+        """
+        This is will fetch all task that belongs to
+        the user. This includes filter for completed
+        and priority. This also have the search. Also
+        have pagination
+        """
         task = (
             Task.objects.filter(user=request.user)
             .select_related("user")
@@ -50,6 +61,9 @@ class TaskList(APIView):
         return paginator.get_paginated_response(serializer.data)
 
     def post(self, request):
+        """
+        This will create a new task that belongs to the user.
+        """
         serializer = TaskSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(user=request.user)
@@ -58,13 +72,24 @@ class TaskList(APIView):
 
 
 class TaskDetails(APIView):
+    """
+    This will get a specific task, update task, delete task
+    """
+
     def get_object(self, pk, user):
+        """
+        This will check if the fetch task belongs to the user
+        trying to access it.
+        """
         try:
             return Task.objects.get(pk=pk, user=user)
         except Task.DoesNotExist:
             raise NotFound("Task Not Found")
 
     def get(self, request, pk):
+        """
+        This will get the task and return it
+        """
         task = self.get_object(pk, request.user)
         if not task:
             raise NotFound("Task Not Found")
@@ -72,6 +97,12 @@ class TaskDetails(APIView):
         return Response(serializer.data)
 
     def put(self, request, pk):
+        """
+        This will update the task,
+        can also change the task partially
+        becuase of the partial=True, this makes the put
+        act like a PATCH method
+        """
         task = self.get_object(pk, request.user)
         if not task:
             raise NotFound("Task Not Found")
@@ -82,6 +113,9 @@ class TaskDetails(APIView):
         raise ValidationError(serializer.errors)
 
     def delete(self, request, pk):
+        """
+        This will delete the task
+        """
         task = self.get_object(pk, request.user)
         if not task:
             raise NotFound("Task Not Found")
@@ -90,6 +124,10 @@ class TaskDetails(APIView):
 
 
 class Register(APIView):
+    """
+    This will Register a user
+    """
+
     permission_classes = [AllowAny]
 
     def post(self, request):
@@ -101,6 +139,10 @@ class Register(APIView):
 
 
 class Login(APIView):
+    """
+    This handles the login and token generation
+    """
+
     permission_classes = [AllowAny]
 
     def post(self, request):

@@ -1,0 +1,44 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.4.2, pluggy-1.6.0
+django: version: 5.2.7, settings: lazyT_api.settings (from ini)
+rootdir: /home/aenze/Desktop/Python_Projects/lazyT_api
+configfile: pytest.ini
+plugins: cov-7.0.0, django-4.11.1
+collected 18 items
+
+tasks/tests.py ..................                                        [100%]
+
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/coreapi/utils.py:5
+  /home/aenze/Desktop/Python_Projects/lazyT_api/.venv/lib/python3.12/site-packages/coreapi/utils.py:5: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+    import pkg_resources
+
+.venv/lib/python3.12/site-packages/coreapi/codecs/download.py:5
+  /home/aenze/Desktop/Python_Projects/lazyT_api/.venv/lib/python3.12/site-packages/coreapi/codecs/download.py:5: DeprecationWarning: 'cgi' is deprecated and slated for removal in Python 3.13
+    import cgi
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================================ tests coverage ================================
+_______________ coverage: platform linux, python 3.12.3-final-0 ________________
+
+Name                                                                    Stmts   Miss  Cover
+-------------------------------------------------------------------------------------------
+tasks/__init__.py                                                           0      0   100%
+tasks/admin.py                                                              7      0   100%
+tasks/apps.py                                                               4      0   100%
+tasks/authentication.py                                                    15      2    87%
+tasks/handlers.py                                                          18      3    83%
+tasks/migrations/0001_initial.py                                            7      0   100%
+tasks/migrations/0002_remove_task_user.py                                   4      0   100%
+tasks/migrations/0003_task_user.py                                          6      0   100%
+tasks/migrations/0004_alter_task_priority_alter_task_user_and_more.py       6      0   100%
+tasks/migrations/__init__.py                                                0      0   100%
+tasks/models.py                                                            15      1    93%
+tasks/serializers.py                                                       18      0   100%
+tasks/tests.py                                                            109      0   100%
+tasks/urls.py                                                               3      0   100%
+tasks/utils.py                                                             29      2    93%
+tasks/views.py                                                             88     13    85%
+-------------------------------------------------------------------------------------------
+TOTAL                                                                     329     21    94%
+======================= 18 passed, 2 warnings in 12.72s ========================

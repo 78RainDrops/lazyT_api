@@ -3,14 +3,20 @@ from rest_framework import exceptions
 from .utils import verify_user
 
 
-class CustomeAuthentication(BaseAuthentication):
+class CustomAuthentication(BaseAuthentication):
     def authenticate(self, request):
         auth_header = request.headers.get("Authorization")
-
-        if not auth_header or not auth_header.startswith("Bearer "):
+        # missing authorization header
+        if not auth_header:
             return None
 
+        # invalid header format
+        if not auth_header.startswith("Bearer "):
+            raise exceptions.AuthenticationFailed("Invalid token header")
+
+        # extract token
         token = auth_header.split(" ")[1]
+        # verify user
         user = verify_user(token)
 
         if not user:

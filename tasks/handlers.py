@@ -1,7 +1,7 @@
 import logging
-from rest_framework.views import exception_handler as drf_exception_handler
+from rest_framework.views import exception_handler
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, exceptions
 
 logger = logging.getLogger(__name__)
 
@@ -11,7 +11,7 @@ def custom_exception_handler(exc, context):
     Custom exception handler to return consistent error responses
     """
     # Call DRF's default exception handler first
-    response = drf_exception_handler(exc, context)
+    response = exception_handler(exc, context)
 
     if response is not None:
         # Safely extract data from DRF's default response
@@ -19,6 +19,11 @@ def custom_exception_handler(exc, context):
 
         # If there's a "detail" key, use it; otherwise use a generic message
         message = data.get("detail", "An error occurred.")
+
+        if isinstance(
+            exc, (exceptions.AuthenticationFailed, exceptions.NotAuthenticated)
+        ):
+            response.status_code = status.HTTP_401_UNAUTHORIZED
 
         # Wrap everything in a consistent structure
         custom_response = {

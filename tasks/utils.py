@@ -2,6 +2,7 @@ from django.conf import settings
 import jwt
 from datetime import datetime, timedelta, timezone
 from django.contrib.auth.models import User
+from rest_framework import exceptions
 
 ALGORITHM = "HS256"
 SECRET_KEY = settings.SECRET_KEY
@@ -32,10 +33,11 @@ def verify_user(token):
     payload = decode_token(token)
 
     if not payload:
-        return None
+        print("Returns a none")
+        raise exceptions.AuthenticationFailed("Invalid or expired token")
 
     try:
         user = User.objects.get(id=payload["user_id"])
         return user
     except User.DoesNotExist:
-        return None
+        raise exceptions.AuthenticationFailed("User not found")

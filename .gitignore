@@ -32,3 +32,6 @@ secrets.json
 .idea/
 *.swp
 *.swo
+
+htmlcov/
+.coverage

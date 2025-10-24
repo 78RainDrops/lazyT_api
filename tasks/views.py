@@ -16,8 +16,11 @@ from .utils import generate_token
 
 class TaskList(APIView):
     """
-    Handles the fetching of all task of the user,
-    and create a new task.
+    get:
+    Return a list of all task.
+
+    post:
+    Create a new task.
     """
 
     def get(self, request):
@@ -73,7 +76,17 @@ class TaskList(APIView):
 
 class TaskDetails(APIView):
     """
-    This will get a specific task, update task, delete task
+    get_object:
+    returns the task if it exist and the user is correct
+
+    get:
+    return the task specified
+
+    put:
+    update the task returned by get_object
+
+    delete:
+    delete the task specified or return by get_object
     """
 
     def get_object(self, pk, user):
@@ -125,7 +138,8 @@ class TaskDetails(APIView):
 
 class Register(APIView):
     """
-    This will Register a user
+    post:
+    Create user
     """
 
     permission_classes = [AllowAny]
@@ -140,7 +154,8 @@ class Register(APIView):
 
 class Login(APIView):
     """
-    This handles the login and token generation
+    post:
+    login user
     """
 
     permission_classes = [AllowAny]

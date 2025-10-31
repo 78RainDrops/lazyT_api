@@ -9,6 +9,18 @@ This API allows authenticated users to create, view, edit, and delete their pers
 
 ---
 
+## 🌐 Live API
+
+**Render Deployment:**
+👉 (https://lazyt-api.onrender.com)
+
+Example endpoints:
+
+- `https://lazyt-api.onrender.com/api/accounts/register/`
+- `https://lazyt-api.onrender.com/api/task/`
+
+---
+
 ## 🚀 Features
 
 - 🔐 **JWT Authentication** (Custom implementation)
@@ -56,7 +68,7 @@ This API allows authenticated users to create, view, edit, and delete their pers
 
 ---
 
-## 🛠 Installation And Setup
+## 🛠 Installation And Setup (Local)
 
 ![Python](https://img.shields.io/badge/python-3.12+-blue)  
 ![Django](https://img.shields.io/badge/Django-3.12+-blue)  
@@ -88,27 +100,53 @@ pip install -r requirements.txt
 
 ```
 
-## Run Migrations
+## Configure environment variables
 
-```bash
-python manage.py makemigrations
-python manage.py migrate
+Create a `.env` file in the root directory:
 
-```
+```ini
 
-## Create a Superuser (optional)
-
-```bash
-python manage.py createsuperuser
-
-```
-
-## Run the Development Server
-
-```bash
-python manage.py runserver
+SECRET_KEY=your-secret-key
+DEBUG=True
+DB_NAME=lazyt_db
+DB_USER=lazyt_user
+DB_PASSWORD=yourpassword
+DB_HOST=localhost
+DB_PORT=5432
+ALLOWED_HOSTS=localhost,127.0.0.1
 
 ```
+
+For production (Render), add these in \*\*Render → Environment Varaibles:
+
+```makefile
+
+SECRET_KEY
+DEBUG=False
+DB_NAME
+DB_USER
+DB_PASSWORD
+DB_HOST
+DB_PORT
+ALLOWED_HOSTS=lazyt-api.onrender.com
+```
+
+---
+
+## 🧪 Testing
+
+Run tests using:
+
+```bash
+python manage.py test
+```
+
+Tests include:
+
+- ✅ User registration and login
+- ✅ JWT validation
+- ✅ Task CRUD operations (create, read, update, delete)
+- ✅ Error handling & missing fields
 
 ---
 
@@ -214,8 +252,8 @@ Once the server is running:
 - **Framework:** Django REST Framework
 - **Auth:** Custom JWT implementation
 - **Docs:** drf-spectacular
-- **Database:** SQL
-- **Logging:** Python logging + DRF custom exception handler
+- **Database:** PostgreSQL
+- **Deploy:** Render
 
 ---
 
@@ -224,6 +262,18 @@ Once the server is running:
 | Version  | Description                                                        |
 | -------- | ------------------------------------------------------------------ |
 | **v1.0** | Initial release – CRUD, JWT Auth, Custom Errors, Optimized Queries |
+| **v1.1** | Deployment on Render + PostgreSQL + Static handling                |
+
+---
+
+## 🏷️ Version Tag
+
+To tag this release:
+
+```bash
+git tag v1.1
+git push origin v1.1
+```
 
 ---
 
@@ -232,7 +282,3 @@ Once the server is running:
 78RainDrops
 
 [GitHub](https://github.com/78RainDrops)
-
-```
-
-```

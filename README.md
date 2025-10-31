@@ -45,11 +45,24 @@ Example endpoints:
     │   ├── urls.py
     │   └── wsgi.py
     │
+    ├── staticfiles/
+    │   ├── admin/
+    │   │   ├── css
+    │   │   ├── img
+    │   │   └── js
+    │   ├── rest_framework/
+    │   │   ├── css
+    │   │   ├── docs
+    │   │   ├── fonts
+    │   │   ├── img
+    │   │   └── js
+    │
     ├── tasks/
     │   ├── __init__.py
     │   ├── admin.py
     │   ├── apps.py
     │   ├── authentication.py
+    │   ├── handlers.py
     │   ├── migrations/
     │   │   └── __init__.py
     │   ├── models.py
@@ -60,9 +73,15 @@ Example endpoints:
     │   └── views.py
     │
     ├── manage.py
+    ├── coverage_report.txt
+    ├── Procfile
+    ├── pytest.ini
+    ├── render.yaml
     ├── setup.py
     ├── requirements.txt
+    ├── runtime.txt
     ├── README.md
+    ├── test_live_api.py
     └── .gitignore
 ```
 
